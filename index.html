@@ -21,36 +21,104 @@
 
       <div class="row">
         <!-- First search part -->
-        <div class="col s5">
-          <div class="input-field">
-            <i class="material-icons prefix">public</i>
-            <input id="icon_prefix" type="text" class="validate">
-            <label for="icon_prefix">Enter City</label>
-            <a class="waves-effect deep-purple darken-2 btn center">search</a>
+        <div class="col s3">
+          <div class="container">
+            <div class="input-field">
+              <i class="material-icons prefix">public</i>
+              <input id="icon_prefix" type="text" class="validate">
+              <label for="icon_prefix">Enter City</label>
+              <a class="waves-effect deep-purple darken-2 btn">search</a>
+            </div>
+            <!-- Last result and suggestions -->  
+            <div class="divider black"></div>
+            <div class="section">
+              <button class="btn waves-effect purple lighten-3 btn black-text" type="submit" name="action">New york
+              </button>
+              <div class="section"></div>
+              <button class="btn waves-effect purple lighten-3 btn black-text" type="submit" name="action">Miami
+              </button>
+              <div class="section"></div>
+              <button class="btn waves-effect purple lighten-3 btn black-text" type="submit" name="action">New Jersey
+              </button>
+              <div class="section"></div>
+              <button class="btn waves-effect purple lighten-3 btn black-text" type="submit" name="action">Minessota
+              </button>
+              <div class="section"></div>
+              <button class="btn waves-effect purple lighten-3 btn black-text" type="submit" name="action">Texas
+              </button>
+              <div class="section"></div>
+              <button class="btn waves-effect purple lighten-3 btn black-text" type="submit" name="action">Chicago
+              </button>
+              <div class="section"></div>
+              <button class="btn waves-effect purple lighten-3 btn black-text" type="submit" name="action">California
+              </button>
+              <div class="section"></div>
+              <button class="btn waves-effect purple lighten-3 btn black-text" type="submit" name="action">Washington
+              </button>
+            </div>
+
           </div>
-          <div class="divider black"></div>
-          <!-- Last result and suggestions -->
 
         </div>
         <!-- second display info part -->
-        <div class="col s7">
+        <div class="col s9">
           <!-- Container for current day info -->
-          <div class="container">
-            <h4>This is my info page</h4> 
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Velit placeat blanditiis dolorum soluta quam! Recusandae numquam placeat ipsa voluptatem ex voluptates rerum, porro nostrum vitae deleniti esse sunt totam suscipit.
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum velit praesentium fuga quis atque magnam molestias sed nulla excepturi, esse earum at cumque expedita porro beatae nihil, voluptas aut nisi!
-            </p>
+          <div id="main-part" class="container col s12">
+            <h4>City and Date</h4> 
+            <h5>Temp</h5>
+            <p>.......</p>
+            <h5>Widd</h5>
+            <p>.......</p>
+            <h5>Humidity</h5>
+            <p>........</p>
+            <h5>UV index</h5>
+            <p>.........</p>
           </div>
           <!-- container for next 5 days prediction weather -->
-          <div class="container">
+          <div class="container col s12">
             <h4>5-Day Forecast</h4>
+            <div id="days" class="col s2">
+              <h5>date:</h5>
+              <i class="small material-icons">brightness_low</i>
+              <h5>Temp: </h5>
+              <h5>Wind:</h5>
+              <h5>Humidity:</h5>
+            </div>
+            <div id="days" class="col s2">
+              <h5>date:</h5>
+              <i class="small material-icons">brightness_low</i>
+              <h5>Temp: </h5>
+              <h5>Wind:</h5>
+              <h5>Humidity:</h5>
+            </div>
+            <div id="days" class="col s2">
+              <h5>date:</h5>
+              <i class="small material-icons">brightness_low</i>
+              <h5>Temp: </h5>
+              <h5>Wind:</h5>
+              <h5>Humidity:</h5>
+            </div>
+            <div id="days" class="col s2">
+              <h5>date:</h5>
+              <i class="small material-icons">brightness_low</i>
+              <h5>Temp: </h5>
+              <h5>Wind:</h5>
+              <h5>Humidity:</h5>
+            </div>
+            <div id="days" class="col s2">
+              <h5>date:</h5>
+              <i class="small material-icons">brightness_low</i>
+              <h5>Temp: </h5>
+              <h5>Wind:</h5>
+              <h5>Humidity:</h5>
+            </div>
           </div>
         </div>
       </div>
 
-
-      
-
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="./JS/web.js"></script>
 </body>

@@ -1,0 +1,15 @@
+#main-part{
+  border:2px solid #000000;
+  margin-top: 2%;
+  padding: 2%;
+
+}
+
+#days{
+    border:2px solid #000000;
+    background-color: rgb(118, 151, 199);
+}
+button{
+    display: flex;
+    width: 100%;
+}
