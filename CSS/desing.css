@@ -13,3 +13,11 @@ button{
     display: flex;
     width: 100%;
 }
+
+.UVLow{
+  background-color: green;
+}
+
+.UVHigh{
+  background-color: red;
+}

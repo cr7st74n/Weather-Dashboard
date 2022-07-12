@@ -4,6 +4,7 @@
 var Number = "5"
 var keyCR = "3b7d870a84d61ceaae66a2fbe9363f4a"
 var saveL;
+var uv = document.querySelector("#uv");
 
 function DataCity(){
      console.log(saveL);
@@ -17,7 +18,31 @@ function DataCity(){
      $("#startSearch").on("click",function(hey){
           var city= $("#icon_prefix").val();
           localStorage.setItem("City",city);
-          saveLoc();
+          uv.classList.remove();
+          saveLoc(city);
+          var CityU = city.toUpperCase();
+          $(`#city`).text(CityU).append(Acdate);
+
+          for(var i=0 ; i<5;i++){
+               $(`#temp${i}`).text("").append("Temp: ");
+               $(`#wind${i}`).text("").append("Wind: ");
+               $(`#humidity${i}`).text("").append("Humidity: ");
+               
+               $(`.temp${i}`).text("").append("Temp: ");
+               $(`.wind${i}`).text("").append("Wind: ");
+               $(`.humidity${i}`).text("").append("Humidity: ");
+
+          }
+          
+          $("#uv").text("").append("UV index: ");
+          Weather_app(city);
+     })
+     $("#hibtn").on("click",function(hey){
+          var city= $("#hibtn").text();
+          console.log(city);
+          //.localStorage.setItem("City",city);
+          uv.classList.remove();
+          //saveLoc(city);
           var CityU = city.toUpperCase();
           $(`#city`).text(CityU).append(Acdate);
 
@@ -37,9 +62,15 @@ function DataCity(){
      })
 }
 
-function saveLoc(){
+function saveLoc(city){
+     valCity = city;
      saveL= localStorage.getItem("City");
+     $("#hibtn").text(saveL);
+     var HistoryCity = document.createElement("button");
+     HistoryCity.type= "button";
 
+     //HistoryCity.innerHTML(valCity);
+     return saveL;
 }
 
 function Weather_app(city){
@@ -81,8 +112,13 @@ function passData(lat,long){
      .then(function(conditions){
 
           $.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${long}&cnt=5&appid=${keyCR}`).then(function(UV){
-               dataUV = UV.current.uvi;
+               var dataUV = UV.current.uvi;
                $("#uv").append(dataUV);
+               if (dataUV <= 2){
+                    uv.classList.add("UVLow");
+               }else{
+                    uv.classList.add("UVHigh");
+               }
                //console.log(dataUV);
           })
 
