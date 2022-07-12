@@ -75,7 +75,7 @@ function saveLoc(city){
 
 function Weather_app(city){
 
-     var url = (`http://api.openweathermap.org/geo/1.0/direct?q=${city},&limit=${Number}&appid=${keyCR}`);
+     var url = (`https://api.openweathermap.org/geo/1.0/direct?q=${city},&limit=${Number}&appid=${keyCR}`);
      var cityName;
      var latCity;
      var lonCity
