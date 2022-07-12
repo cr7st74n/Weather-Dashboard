@@ -3,9 +3,10 @@
 
 var Number = "5"
 var keyCR = "3b7d870a84d61ceaae66a2fbe9363f4a"
-
+var saveL;
 
 function DataCity(){
+     console.log(saveL);
      var mom;
      for(var i = 0; i<5; i++ ){
           mom = moment().add([i], 'days').calendar();
@@ -15,8 +16,9 @@ function DataCity(){
 
      $("#startSearch").on("click",function(hey){
           var city= $("#icon_prefix").val();
+          localStorage.setItem("City",city);
+          saveLoc();
           var CityU = city.toUpperCase();
-
           $(`#city`).text(CityU).append(Acdate);
 
           for(var i=0 ; i<5;i++){
@@ -35,6 +37,11 @@ function DataCity(){
      })
 }
 
+function saveLoc(){
+     saveL= localStorage.getItem("City");
+
+}
+
 function Weather_app(city){
 
      var url = (`http://api.openweathermap.org/geo/1.0/direct?q=${city},&limit=${Number}&appid=${keyCR}`);
@@ -48,7 +55,7 @@ function Weather_app(city){
      })
      .then(function(ArrData){
           cityName = ArrData[0].name;
-          console.log(cityName);
+          //console.log(cityName);
           latCity = ArrData[0].lat;
           //console.log(latCity);
           lonCity = ArrData[0].lon;
@@ -76,14 +83,14 @@ function passData(lat,long){
           $.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${long}&cnt=5&appid=${keyCR}`).then(function(UV){
                dataUV = UV.current.uvi;
                $("#uv").append(dataUV);
-               console.log(dataUV);
+               //console.log(dataUV);
           })
 
           var data = conditions.list;
-          console.log(conditions);
+          //console.log(conditions);
 
           for (var i=0 ;i<data.length ; i++ ){
-               var temp = data[i].main.temp;
+               var temp = (data[i].main.temp-275.15)*9/5+(32);
                var wind = data[i].wind.speed;
                var hum = data[i].main.humidity;
                var icon = data[i].weather[0].icon;
@@ -92,14 +99,14 @@ function passData(lat,long){
                $(`#icon${i}`).attr("src",iconurl);
                $(`.icon${i}`).attr("src",iconurl);
 
-               $(`.temp${i}`).append(temp).append(" F");
+               $(`.temp${i}`).append(temp.toFixed(2)).append(" F");
                $(`.wind${i}`).append(wind).append(" MPH");
                $(`.humidity${i}`).append(hum).append("%");
 
-               $(`#temp${i}`).append(temp).append(" F");
+               $(`#temp${i}`).append(temp.toFixed(2)).append(" F");
                $(`#wind${i}`).append(wind).append(" MPH");
                $(`#humidity${i}`).append(hum).append("%");
-               console.log(temp);
+               //console.log(temp);
           }
 
      })
@@ -109,4 +116,7 @@ function passData(lat,long){
      })
 }
 
-console.log(DataCity());
+
+saveLoc()
+console.log(saveLoc);
+DataCity();
