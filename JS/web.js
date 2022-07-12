@@ -1,16 +1,25 @@
-var mom = moment().format('MMMM Do YYYY, h:mm:ss a'); //Current date
-console.log(mom);
+var mom;
+for(var i = 0; i<5; i++ ){
+     mom = moment().add([i], 'days').calendar();
+     $(`#date${i}`).text(mom);
+}
 
 
 
 var Number = "5"
 var keyCR = "3b7d870a84d61ceaae66a2fbe9363f4a"
-var key2 = "c59053e9cfd68c4fcf70f81e077a7583"
+
 
 function DataCity(){
 
      $("#startSearch").on("click",function(hey){
           var city= $("#icon_prefix").val();
+          var CityU = city.toUpperCase();
+          $("#city").text(CityU).append(mom);
+          $("#temp").text("").append("Temp: ");
+          $("#wind").text("").append("Wind: ");
+          $("#humidity").text("").append("Humidity: ");
+          //$("#uv").text("").append("UV index: ");
           Weather_app(city);
      })
 }
@@ -30,11 +39,12 @@ function Weather_app(city){
           cityName = ArrData[0].name;
           console.log(cityName);
           latCity = ArrData[0].lat;
-          console.log(latCity);
+          //console.log(latCity);
           lonCity = ArrData[0].lon;
-          console.log(lonCity);  
+          //console.log(lonCity);  
 
           passData(latCity,lonCity);
+
      })
      .catch(function(err){
           console.log(err);
@@ -44,26 +54,38 @@ function Weather_app(city){
 } 
 
 function passData(lat,long){
-
-     var url = (`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=${keyCR}`);
+     var url = (`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${long}&cnt=5&appid=${keyCR}`);
 
      var DataWeather = fetch(url).then(function(ResponseWeb){
           var WeatherData = ResponseWeb.json();
           return WeatherData;
      })
      .then(function(conditions){
-          var temp = conditions;
-          console.log("adsfaf")
-          console.log(temp.main);
+          var data = conditions.list;
+          console.log(conditions);
+          var temp = data[0].main.temp;
+          console.log(temp);
+          var wind = data[0].wind.speed;
+          console.log(wind);
+          var hum = data[0].main.humidity
+          console.log(hum);
+
+          displayResults(temp,wind,hum);
 
      })
      .catch(function(err){
           console.log(err);
           console.log('here is an error');
      })
-
 }
 
+function displayResults(tempe,wind,hum){
+     var TempFa = ((tempe-273.15)*(9/5) + 32);
+     $("#temp").append(TempFa.toFixed(2)).append(" F");
+     $("#wind").append(wind).append(" MPH");
+     $("#humidity").append(hum).append("%");
+
+}
 
 
 
