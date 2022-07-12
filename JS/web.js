@@ -1,8 +1,3 @@
-var mom;
-for(var i = 0; i<5; i++ ){
-     mom = moment().add([i], 'days').calendar();
-     $(`#date${i}`).text(mom);
-}
 
 
 
@@ -11,15 +6,31 @@ var keyCR = "3b7d870a84d61ceaae66a2fbe9363f4a"
 
 
 function DataCity(){
+     var mom;
+     for(var i = 0; i<5; i++ ){
+          mom = moment().add([i], 'days').calendar();
+          $(`#date${i}`).text(mom);
+     }
+     var Acdate = moment().format(' MMMM Do YYYY');
 
      $("#startSearch").on("click",function(hey){
           var city= $("#icon_prefix").val();
           var CityU = city.toUpperCase();
-          $("#city").text(CityU).append(mom);
-          $("#temp").text("").append("Temp: ");
-          $("#wind").text("").append("Wind: ");
-          $("#humidity").text("").append("Humidity: ");
-          //$("#uv").text("").append("UV index: ");
+
+          $(`#city`).text(CityU).append(Acdate);
+
+          for(var i=0 ; i<5;i++){
+               $(`#temp${i}`).text("").append("Temp: ");
+               $(`#wind${i}`).text("").append("Wind: ");
+               $(`#humidity${i}`).text("").append("Humidity: ");
+               
+               $(`.temp${i}`).text("").append("Temp: ");
+               $(`.wind${i}`).text("").append("Wind: ");
+               $(`.humidity${i}`).text("").append("Humidity: ");
+
+          }
+          
+          $("#uv").text("").append("UV index: ");
           Weather_app(city);
      })
 }
@@ -61,16 +72,35 @@ function passData(lat,long){
           return WeatherData;
      })
      .then(function(conditions){
+
+          $.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${long}&cnt=5&appid=${keyCR}`).then(function(UV){
+               dataUV = UV.current.uvi;
+               $("#uv").append(dataUV);
+               console.log(dataUV);
+          })
+
           var data = conditions.list;
           console.log(conditions);
-          var temp = data[0].main.temp;
-          console.log(temp);
-          var wind = data[0].wind.speed;
-          console.log(wind);
-          var hum = data[0].main.humidity
-          console.log(hum);
 
-          displayResults(temp,wind,hum);
+          for (var i=0 ;i<data.length ; i++ ){
+               var temp = data[i].main.temp;
+               var wind = data[i].wind.speed;
+               var hum = data[i].main.humidity;
+               var icon = data[i].weather[0].icon;
+
+               var iconurl = "http://openweathermap.org/img/w/"+icon+".png";
+               $(`#icon${i}`).attr("src",iconurl);
+               $(`.icon${i}`).attr("src",iconurl);
+
+               $(`.temp${i}`).append(temp).append(" F");
+               $(`.wind${i}`).append(wind).append(" MPH");
+               $(`.humidity${i}`).append(hum).append("%");
+
+               $(`#temp${i}`).append(temp).append(" F");
+               $(`#wind${i}`).append(wind).append(" MPH");
+               $(`#humidity${i}`).append(hum).append("%");
+               console.log(temp);
+          }
 
      })
      .catch(function(err){
@@ -78,15 +108,5 @@ function passData(lat,long){
           console.log('here is an error');
      })
 }
-
-function displayResults(tempe,wind,hum){
-     var TempFa = ((tempe-273.15)*(9/5) + 32);
-     $("#temp").append(TempFa.toFixed(2)).append(" F");
-     $("#wind").append(wind).append(" MPH");
-     $("#humidity").append(hum).append("%");
-
-}
-
-
 
 console.log(DataCity());
