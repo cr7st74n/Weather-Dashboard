@@ -16,3 +16,8 @@ Web app to check the weather in diferent cities.
 
 ## Usage
 instructions:
+![image](https://user-images.githubusercontent.com/34308684/178416186-e67bf982-cb90-42cd-ac43-54881f839953.png)
+
+Getting API
+
+![image](https://user-images.githubusercontent.com/34308684/178416266-f1270aaf-f37d-4f39-bb08-952313abbf29.png)
